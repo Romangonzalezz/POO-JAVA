@@ -23,8 +23,10 @@ public class Main {
             System.out.println("Peso?");
             float peso = scanner.nextFloat();
 
-            System.out.println("Altura?");
+            System.out.println("Ingrese su altura en centímetros:");
             float altura = scanner.nextFloat();
+
+            System.out.println();
 
             Persona persona1 = new Persona(nombre, edad, sexo, peso, altura);
 
@@ -35,9 +37,22 @@ public class Main {
             persona3.setEdad(18);
             persona3.setSexo('H');
             persona3.setPeso(60);
-            persona3.setAltura(1.70f);
+            persona3.setAltura(150);
 
 
+            persona1.calcularIMC(persona1);
+            persona2.calcularIMC(persona2);
+            persona3.calcularIMC(persona3);
+            System.out.println();
+
+            persona1.esMayorDeEdad();
+            persona2.esMayorDeEdad();
+            persona3.esMayorDeEdad();
+            System.out.println();
+
+            System.out.println(persona1.toString());
+            System.out.println(persona2.toString());
+            System.out.println(persona3.toString());
 
         }
 }

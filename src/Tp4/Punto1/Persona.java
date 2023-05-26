@@ -21,40 +21,57 @@ public class Persona {
 
     Random random = new Random();
 
-    public Persona() {};
+    public Persona() {
+        generarDni();
+    };
 
     public Persona(String nombre, int edad, char sexo) {
         this.nombre = nombre;
         this.edad = edad;
         this.sexo = sexo;
+        generarDni();
     };
     public Persona(String nombre, int edad, char sexo, float peso, float altura) {
         this.nombre = nombre;
         this.edad = edad;
-        this.dni = "";
+        generarDni();
         this.sexo = sexo;
         this.peso = peso;
         this.altura = altura;
     };
 
     //PESO EN KG Y ALTURA EN MTS, CALCULAR PESO IDEAL
-    public int calcularIMC() {
+    public int calcularIMC(Persona persona) {
 
-        double alturaEnMetros = altura / 100.0;
-        double imc = peso / (alturaEnMetros * alturaEnMetros);
+        double alturaEnMetros = persona.getAltura() / 100.0;
+        double imc = persona.getPeso() / (alturaEnMetros * alturaEnMetros);
+
+        if (persona.getAltura() == 0 || persona.getPeso() == 0){
+            System.out.println("\n Imposible calcular sin el valor altura o peso. \n");
+            return 0;
+        }
 
         if (imc < 20) {
+            System.out.println(persona.getNombre() + " Esta por debajo del peso ideal");
             return POR_DEBAJO_PESO_IDEAL;
         } else if (imc >= 20 && imc <= 25) {
+            System.out.println(persona.getNombre() + " Esta en su peso ideal");
             return PESO_IDEAL;
         } else {
+            System.out.println(persona.getNombre() + " Esta en sobrepeso");
             return SOBREPESO;
         }
     }
 
     //CALCULAR SI ES MAYOR DE EDAD
     public boolean esMayorDeEdad() {
-        return edad >= 18;
+        boolean esMayor = edad >= 18;
+        if (esMayor) {
+            System.out.println("Es mayor de edad!");
+        } else {
+            System.out.println("Es menor de edad!");
+        }
+        return esMayor;
     }
 
     //COMPROBAR SEXO MEDIANTE CHAR
@@ -107,16 +124,27 @@ public class Persona {
         this.altura = altura;
     }
 
+    public float getPeso() {
+        return peso;
+    }
+
+    public float getAltura() {
+        return altura;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
     @Override
     public String toString() {
-        return "Persona{" +
-                "nombre='" + nombre + '\'' +
-                ", edad=" + edad +
-                ", dni='" + dni + '\'' +
-                ", sexo=" + sexo +
-                ", peso=" + peso +
-                ", altura=" + String.format("%.2f", altura) +
-                '}';
+        return  "\n" +
+                "Nombre=" + nombre + "\n" +
+                " Edad=" + edad + "\n" +
+                " Dni=" + dni + "\n" +
+                " Sexo=" + sexo + "\n" +
+                " Peso=" + peso + "\n" +
+                " Altura=" + String.format("%.2f", altura);
     }
 
 }
