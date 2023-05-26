@@ -1,5 +1,8 @@
 package Tp4.Punto1;
 
+//RANDOM PARA NUMERO ALEATORIO 8 CIFRAS
+import java.util.Random;
+
 public class Persona {
     private String nombre = "";
     private int edad = 0;
@@ -16,6 +19,10 @@ public class Persona {
     private static final int PESO_IDEAL = -1; // MENOR A 20
     private static final int POR_DEBAJO_PESO_IDEAL = 0; //DEBAJO PESO IDEAL
     private static final int SOBREPESO = 1; //SOBRE PESO
+
+    final int divisor = 23;
+
+    Random random = new Random();
 
     public Persona() {
         this.sexo = SEXO_POR_DEFECTO;
@@ -56,12 +63,53 @@ public class Persona {
     }
 
     //COMPROBAR SEXO MEDIANTE CHAR
-    private void comprobarSexo(char sexoChar) {
+    public void comprobarSexo(char sexoChar) {
         if (sexoChar == 'H' || sexoChar == 'M') {
             this.sexo = (sexoChar == 'H') ? Sexo.HOMBRE : Sexo.MUJER; // SI SE INGRESA H, ES HOMBRE, SI SE INGRESA M MUJER.
         } else {
             this.sexo = Sexo.HOMBRE;
         }
+    }
+
+    private void generarDni() {
+        //Generamos un número de 8 digitos
+        int numero_aleatorio = random.nextInt(90000000) + 10000000;
+        int res = numero_aleatorio - (numero_aleatorio / divisor * divisor);
+
+        //Calculamos la letra del DNI
+        char letraDNI = generarLetraDNI(res);
+
+        //Pasamos el dni a String
+        dni = Integer.toString(numero_aleatorio) + letraDNI;
+    }
+
+    private char generarLetraDNI(int res) {
+        char letras[] = {'T', 'R', 'W', 'A', 'G', 'M', 'Y',
+                'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z',
+                'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'};
+
+        return letras[res];
+    }
+
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+
+    public void setSexo(Sexo sexo) {
+        this.sexo = sexo;
+    }
+
+    public void setPeso(float peso) {
+        this.peso = peso;
+    }
+
+    public void setAltura(float altura) {
+        this.altura = altura;
     }
 
     @Override
