@@ -8,14 +8,11 @@ public class Persona {
     private int edad = 0;
     private String dni = "";
 
-    private Sexo sexo;
+    private char sexo;
 
     private float peso = 0.0f;
 
     private float altura = 0.0f;
-
-    private static final Sexo SEXO_POR_DEFECTO = Sexo.HOMBRE;
-
     private static final int PESO_IDEAL = -1; // MENOR A 20
     private static final int POR_DEBAJO_PESO_IDEAL = 0; //DEBAJO PESO IDEAL
     private static final int SOBREPESO = 1; //SOBRE PESO
@@ -24,23 +21,21 @@ public class Persona {
 
     Random random = new Random();
 
-    public Persona() {
-        this.sexo = SEXO_POR_DEFECTO;
-    }
+    public Persona() {};
 
-    public Persona(String nombre, int edad, Sexo sexo) {
+    public Persona(String nombre, int edad, char sexo) {
         this.nombre = nombre;
         this.edad = edad;
         this.sexo = sexo;
-    }
-    public Persona(String nombre, int edad, String dni,Sexo sexo, float peso, float altura) {
+    };
+    public Persona(String nombre, int edad, char sexo, float peso, float altura) {
         this.nombre = nombre;
         this.edad = edad;
-        this.dni = dni;
+        this.dni = "";
         this.sexo = sexo;
         this.peso = peso;
         this.altura = altura;
-    }
+    };
 
     //PESO EN KG Y ALTURA EN MTS, CALCULAR PESO IDEAL
     public int calcularIMC() {
@@ -65,9 +60,9 @@ public class Persona {
     //COMPROBAR SEXO MEDIANTE CHAR
     public void comprobarSexo(char sexoChar) {
         if (sexoChar == 'H' || sexoChar == 'M') {
-            this.sexo = (sexoChar == 'H') ? Sexo.HOMBRE : Sexo.MUJER; // SI SE INGRESA H, ES HOMBRE, SI SE INGRESA M MUJER.
+            this.sexo = sexoChar;
         } else {
-            this.sexo = Sexo.HOMBRE;
+            this.sexo = 'H';
         }
     }
 
@@ -100,7 +95,7 @@ public class Persona {
         this.edad = edad;
     }
 
-    public void setSexo(Sexo sexo) {
+    public void setSexo(char sexo) {
         this.sexo = sexo;
     }
 
@@ -120,7 +115,7 @@ public class Persona {
                 ", dni='" + dni + '\'' +
                 ", sexo=" + sexo +
                 ", peso=" + peso +
-                ", altura=" + altura +
+                ", altura=" + String.format("%.2f", altura) +
                 '}';
     }
 
